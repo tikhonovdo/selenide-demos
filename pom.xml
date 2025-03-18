@@ -22,7 +22,7 @@
         <poi.version>5.2.3</poi.version>
         <selenium.version>4.29.0</selenium.version>
         <selenide.version>7.7.3</selenide.version>
-        <start-class>ru.tikhonovdo.enrichment.FinanceDataEnricherApplication</start-class>
+        <start-class>ru.tikhonovdo.selenidedemo.DemoApplication</start-class>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
