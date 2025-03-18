@@ -1,27 +1,25 @@
-# Selenide proxy usage test
+# Selenide demos
 
 ---
 ## Disclaimer
-Данный проект является тестом использования proxy в selenide. :)
+Данный проект является набором сценариев использования selenide и сопутствующей обвязки.
 
-Для запуска проекта нужна:
+Для запуска нужна:
 - java 21,
 - maven,
-- docker + compose
-- [chrome for testing](https://storage.googleapis.com/chrome-for-testing-public/134.0.6944.2/win64/chrome-win64.zip)
-- [chrome driver](https://storage.googleapis.com/chrome-for-testing-public/134.0.6944.2/win64/chromedriver-win64.zip)
+- chrome for testing,
+- chrome driver
 
-#### Локальный запуск
-1) Требуется явно создать подсеть для selenoid, 
-2) Собрать приложение, запустить контейнеры postgres и selenoid,
-```shell
-docker network create selenoid
-mvn clean package && docker compose build && docker compose up selenoid
-```
+Ссылки на последние два пункта, использующиеся в проекте:
+- chrome for testing:
+  - [win64](https://storage.googleapis.com/chrome-for-testing-public/134.0.6944.2/win64/chrome-win64.zip),
+  - [linux64](https://storage.googleapis.com/chrome-for-testing-public/134.0.6944.2/linux64/chrome-linux64.zip),
+  - [mac-arm64](https://storage.googleapis.com/chrome-for-testing-public/134.0.6944.2/mac-arm64/chrome-mac-arm64.zip),
+  - [mac-x64](https://storage.googleapis.com/chrome-for-testing-public/134.0.6944.2/mac-x64/chrome-mac-x64.zip).
+- chrome driver:
+  - [win64](https://storage.googleapis.com/chrome-for-testing-public/134.0.6944.2/win64/chromedriver-win64.zip),
+  - [linux64](https://storage.googleapis.com/chrome-for-testing-public/134.0.6944.2/linux64/chromedriver-linux64.zip),
+  - [mac-arm64](https://storage.googleapis.com/chrome-for-testing-public/134.0.6944.2/mac-arm64/chromedriver-mac-arm64.zip),
+  - [mac-x64](https://storage.googleapis.com/chrome-for-testing-public/134.0.6944.2/mac-x64/chromedriver-mac-x64.zip).
 
-#### Запуск приложения в докер-контейнере
-1) создать `.env.docker` файл, в котором указать `ACTIVE_PROFILES=docker`
-2) собрать образ и запустить via docker compose
-```shell
-mvn clean package -Pdocker && docker compose build && docker compose --env-file .env.docker up
-```
+Другие версии можно [поискать здесь](https://googlechromelabs.github.io/chrome-for-testing/known-good-versions-with-downloads.json).
