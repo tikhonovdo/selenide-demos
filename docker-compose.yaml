@@ -1,0 +1,18 @@
+version: "3.9"
+
+networks:
+  selenoid:
+    external: true
+
+services:
+  selenoid:
+    image: "aerokube/selenoid"
+    restart: always
+    command: ["-conf", "/etc/selenoid/browsers.json", "-container-network", "selenoid"]
+    volumes:
+      - ".:/etc/selenoid/" # assumed current dir contains browsers.json; in case of changes in browser.json selenoid must be restared
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    networks:
+      selenoid: null
+    ports:
+      - "4444:4444"
