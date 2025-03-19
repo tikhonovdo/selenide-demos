@@ -5,20 +5,32 @@ import com.codeborne.selenide.Selenide
 import org.openqa.selenium.chrome.ChromeOptions
 import org.openqa.selenium.logging.LogType
 
-fun runProxyUseCase() {
-    System.setProperty("webdriver.chrome.driver", "C:\\tmp\\chromedriver-win64\\chromedriver.exe")
-    Configuration.browserBinary = "C:\\tmp\\chrome-win64\\chrome.exe"
+fun selenoidConfig() {
+    Configuration.remote = "http://localhost:4444/wd/hub" // url to selenoid
     Configuration.webdriverLogsEnabled = true
     Configuration.browserCapabilities = ChromeOptions().apply {
-        browserVersion = "134.0.6944.2"
+        browserVersion = "133.0"
         addArguments("--enable-logging")
         addArguments("--log-level=0")
         setCapability("goog:loggingPrefs", mapOf(LogType.PERFORMANCE to "ALL"))
     }
+}
+
+fun runSelenoidUseCase() {
+    selenoidConfig()
+
+    Selenide.open("https://aerokube.com/selenoid/")
+    println(Selenide.screenshot("selenoid-use-case-01"))
+
+    printWebDriverLogs(LogType.PERFORMANCE)
+}
+
+fun runSelenoidProxyUseCase() {
+    selenoidConfig()
     Configuration.proxyEnabled = true
 
-    Selenide.open("https://selenide.org/")
-    println(Selenide.screenshot("proxy-use-case-01"))
+    Selenide.open("https://the-internet.herokuapp.com/")
+    println(Selenide.screenshot("selenoid-proxy-use-case-01"))
 
     printWebDriverLogs(LogType.PERFORMANCE)
 }
