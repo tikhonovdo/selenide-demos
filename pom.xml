@@ -31,37 +31,6 @@
         <maven.compiler.target>21</maven.compiler.target>
     </properties>
 
-    <profiles>
-        <profile>
-            <id>docker</id>
-            <properties>
-                <selenide.properties.path>src/main/docker/</selenide.properties.path>
-            </properties>
-            <build>
-                <resources>
-                    <resource>
-                        <directory>src/main/resources/</directory>
-                        <excludes>
-                            <exclude>selenide.properties</exclude>
-                        </excludes>
-                        <filtering>true</filtering>
-                    </resource>
-                </resources>
-                <plugins>
-                    <plugin>
-                        <groupId>org.springframework.boot</groupId>
-                        <artifactId>spring-boot-maven-plugin</artifactId>
-                        <configuration>
-                            <layers>
-                                <enabled>true</enabled>
-                            </layers>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
-
     <dependencies>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
@@ -109,18 +78,6 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.testcontainers</groupId>
-                <artifactId>testcontainers-bom</artifactId>
-                <version>${testcontainers.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
     <build>
         <finalName>enrichment</finalName>
@@ -241,46 +198,6 @@
                                 </resource>
                             </resources>
                         </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>io.fabric8</groupId>
-                <artifactId>docker-maven-plugin</artifactId>
-                <version>0.43.4</version>
-                <configuration>
-                    <images>
-                        <image>
-                            <name>dtikhonov/${project.build.finalName}:${project.version}</name>
-                            <build>
-                                <from>eclipse-temurin:17-jdk-jammy</from>
-                                <dockerFile>${basedir}/Dockerfile</dockerFile>
-                                <buildx>
-                                    <platforms>
-                                        <platform>linux/arm64,linux/amd64</platform>
-                                    </platforms>
-                                </buildx>
-                                <tags>
-                                    <tag>latest</tag>
-                                </tags>
-                            </build>
-                        </image>
-                    </images>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>Build docker container</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>build</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>Push docker container</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>push</goal>
-                        </goals>
                     </execution>
                 </executions>
             </plugin>

@@ -10,8 +10,8 @@ class DemoApplication {
         @JvmStatic
         fun main(vararg args: String) {
             runApplication<DemoApplication>(*args)
-//            runProxyUseCase()
-            runSelenoidUseCase()
+            runProxyUseCase()
+//            runSelenoidUseCase()
 //            runSelenoidProxyUseCase()
         }
     }
